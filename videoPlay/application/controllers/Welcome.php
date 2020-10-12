@@ -79,7 +79,7 @@ class Welcome extends CI_Controller {
 
 	public function logout(){
 		
-		session_start();
+		
 		session_destroy();
 		redirect("welcome");
 	}
