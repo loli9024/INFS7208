@@ -11,7 +11,7 @@ class SignIn extends CI_Controller {
         public function __construct()
         {
                 parent::__construct();
-                $this->load->helper(array('form', 'url','captcha'));
+                $this->load->helper(array('form', 'url'));
                 $this->load->model('user_model');
                 $this->load->model('video_model');
                 $this->load->library('session');
@@ -21,7 +21,7 @@ class SignIn extends CI_Controller {
 
         public function index()
         {
-        // Captcha configuration
+        /*Captcha configuration
             $config = array(
                 'img_path'      => 'captcha_images/',
                 'img_url'       => base_url().'captcha_images/',
@@ -31,14 +31,14 @@ class SignIn extends CI_Controller {
                 'word_length'   => 8,
                 'font_size'     => 18
             );
-            $captcha = create_captcha($config);
+            //$captcha = create_captcha($config);
             
             // Unset previous captcha and set new captcha word
-            $this->session->unset_userdata('captchaCode');
-            $this->session->set_userdata('captchaCode', $captcha['word']);
+            //$this->session->unset_userdata('captchaCode');
+            //$this->session->set_userdata('captchaCode', $captcha['word']);
             
             // Pass captcha image to view
-            $data['captchaImg'] = $captcha['image'];
+            $data['captchaImg'] = $captcha['image'];*/
 
             $data['error'] = ' ' ;
             
@@ -50,7 +50,7 @@ class SignIn extends CI_Controller {
         public function login(){
 
             
-                $inputCaptcha = $this->input->post('captcha');
+              /*  $inputCaptcha = $this->input->post('captcha');
                 $sessCaptcha = $this->session->userdata('captchaCode');
                 
                 // Captcha configuration
@@ -71,7 +71,7 @@ class SignIn extends CI_Controller {
             
             // Pass captcha image to view
             $datacaptcha['captchaImg'] = $captcha['image'];
-                if($inputCaptcha === $sessCaptcha){
+                if($inputCaptcha === $sessCaptcha){*/
                     if(get_cookie('remember')) {
                         
                         $data = array(
@@ -98,7 +98,7 @@ class SignIn extends CI_Controller {
                             
                         } else {
                             $this->session->set_flashdata('message',' Invalid username or password');
-                            $this->load->view('signIn', $datacaptcha);
+                           // $this->load->view('signIn', $datacaptcha);
                         }
                     } else{
                         $this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[100]|xss_clean');
@@ -151,11 +151,11 @@ class SignIn extends CI_Controller {
 
                     }
                     
-                }else{
+                /*}else{
 
                     $this->session->set_flashdata('message',' Captcha code does not match, please try again');
                     $this->load->view('signIn', $datacaptcha);
-                }
+                }*/
         
 
            
