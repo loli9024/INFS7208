@@ -46,13 +46,7 @@
                     required autocomplete="off">
                     <input type="password" name="password" placeholder="Password" value="<?php echo get_cookie('password'); ?>" required>
                     <p>Remember Me: <input name="remember" type="checkbox" <?php echo get_cookie('remember') ? 'checked="checked"' : ''; ?>/></p>
-                    <p id="captImg"><?php echo $captchaImg; ?></p>
-                    <p>Can't read the image? click <a href="javascript:void(0);" class="refreshCaptcha">here</a> to refresh.</p>
-
-                    Enter the code : 
-                    <input type="text" name="captcha" value="" required autocomplete="off"/>
                     <input type="submit" name="submit" value="SUBMIT"/>
-
  
 
             </div>
@@ -68,16 +62,16 @@
 
 </div>
 
-<!-- captcha refresh code -->
+<!-- captcha refresh code 
 <script>
 $(document).ready(function(){
     $('.refreshCaptcha').on('click', function(){
-        $.get('<?php echo base_url().'signIn/refresh'; ?>', function(data){
+        $.get('<!?php //echo base_url().'signIn/refresh'; ?>', function(data){
             $('#captImg').html(data);
         });
     });
 });
-</script>
+</script>-->
 
 </body>
 </html>
