@@ -95,10 +95,7 @@ class SignIn extends CI_Controller {
                             if($subscriptions)
                             set_cookie("subscriptions", $subscriptions , $this->exp_time);
 
-                            $notification=$this->video_model->getNotification($this->input->post('username'));
-                            $this->session->set_userdata('notification',$notification);
-                            if($notification)
-                            set_cookie("notification", $notification , $this->exp_time);
+                    
                         
                             $this->session->set_flashdata('login', 'You have been successfully logged in');
                             $this->session->keep_flashdata('login');					
@@ -148,10 +145,6 @@ class SignIn extends CI_Controller {
                                 if($subscriptions)
                                 set_cookie("subscriptions", $subscriptions , $this->exp_time);
                                 
-                                $notification=$this->video_model->getNotification($this->input->post('username'));
-                                $this->session->set_userdata('notification',$notification);
-                                if($notification)
-                                set_cookie("notification", $notification , $this->exp_time);
 
                                 $this->session->set_flashdata('login', 'You have been successfully logged in');
                                 $this->session->keep_flashdata('login');					
