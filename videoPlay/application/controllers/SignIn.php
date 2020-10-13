@@ -86,12 +86,17 @@ class SignIn extends CI_Controller {
                             $_SESSION["userLoggedIn"] = $this->input->post('username');
                             $this->session->set_userdata('username',$this->input->post('username') );
                             set_cookie("userLoggedIn", $this->input->post('username'), $this->exp_time);
+                            $user=$this->user_model->getUserByUsername($this->input->post('username'));
+                            $this->session->set_userdata('picture',$user->profilePic );
+                            set_cookie("picture", $user->profilePic , $this->exp_time);
                             
-                            $subscriptions=$this->user_model->getSubscriptions($this->session->userdata('username'));
+                            $subscriptions=$this->user_model->getSubscriptions($this->input->post('username'));
                             $this->session->set_userdata('subscriptions',$subscriptions);
-                            
-                            $notification=$this->video_model->getNotification($this->session->userdata('username'));
+                            set_cookie("subscriptions", $subscriptions , $this->exp_time);
+                                
+                            $notification=$this->video_model->getNotification($this->input->post('username'));
                             $this->session->set_userdata('notification',$notification);
+                            set_cookie("notification", $notification , $this->exp_time);
                         
                             $this->session->set_flashdata('login', 'You have been successfully logged in');
                             $this->session->keep_flashdata('login');					
@@ -131,16 +136,16 @@ class SignIn extends CI_Controller {
                                 
                                 $this->session->set_userdata('username',$this->input->post('username') );
 
-                                $user=$this->user_model->getUserByUsername($this->session->userdata('username'));
+                                $user=$this->user_model->getUserByUsername($this->input->post('username'));
                                 $this->session->set_userdata('picture',$user->profilePic );
                                 set_cookie("picture", $user->profilePic , $this->exp_time);
                                 
 
-                                $subscriptions=$this->user_model->getSubscriptions($this->session->userdata('username'));
+                                $subscriptions=$this->user_model->getSubscriptions($this->input->post('username'));
                                 $this->session->set_userdata('subscriptions',$subscriptions);
                                 set_cookie("subscriptions", $subscriptions , $this->exp_time);
                                 
-                                $notification=$this->video_model->getNotification($this->session->userdata('username'));
+                                $notification=$this->video_model->getNotification($this->input->post('username'));
                                 $this->session->set_userdata('notification',$notification);
                                 set_cookie("notification", $notification , $this->exp_time);
 
