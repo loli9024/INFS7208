@@ -90,13 +90,7 @@ class SignIn extends CI_Controller {
                             $this->session->set_userdata('picture',$user->profilePic );
                             set_cookie("picture", $user->profilePic , $this->exp_time);
                             
-                            $subscriptions=$this->user_model->getSubscriptions($this->input->post('username'));
-                            $this->session->set_userdata('subscriptions',$subscriptions);
-                            if($subscriptions)
-                            set_cookie("subscriptions", $subscriptions , $this->exp_time);
-
-                    
-                        
+  
                             $this->session->set_flashdata('login', 'You have been successfully logged in');
                             $this->session->keep_flashdata('login');					
                             redirect('welcome');
@@ -138,12 +132,6 @@ class SignIn extends CI_Controller {
                                 $user=$this->user_model->getUserByUsername($this->input->post('username'));
                                 $this->session->set_userdata('picture',$user->profilePic );
                                 set_cookie("picture", $user->profilePic , $this->exp_time);
-                                
-
-                                $subscriptions=$this->user_model->getSubscriptions($this->input->post('username'));
-                                $this->session->set_userdata('subscriptions',$subscriptions);
-                                if($subscriptions)
-                                set_cookie("subscriptions", $subscriptions , $this->exp_time);
                                 
 
                                 $this->session->set_flashdata('login', 'You have been successfully logged in');
