@@ -98,21 +98,7 @@
                         </a>
                     </div> 
 
-                    <div class='navigationItems'>
-                    <span class='heading'>Subscriptions</span>
-                    <?php
-                    $subscriptions=get_cookie('subscriptions');
-                    if($subscriptions)
-                        foreach($subscriptions as $row)
-                        {
-                        $link=base_url('profile?username='.$row->userTo);  
-                        $img= base_url('assets/images/maleuser.png'); 
-                        
-                        echo  '<div class='."navigationItem".'>
-                        <a href="'.$link.'"><span>'.$row->userTo.'</span></a> </div> ';
-                        }
-                    ?>
-                    </div> 
+                   
 
             </div>
             
