@@ -51,7 +51,6 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="<?php echo base_url('assets/images/notification.png'); ?>">
-                    <span class="badge"><?php get_cookie('notification'); echo sizeof($notification)  ?></span> </a>
                     <ul class="dropdown-menu">
                             <li>
                                     <!-- Inner Menu: contains the notifications -->
