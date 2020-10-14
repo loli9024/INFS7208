@@ -1,0 +1,95 @@
+version: "3.7"
+services:
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    user: root
+    ports:
+      - '3306'
+    environment:
+      - MYSQL_REPLICATION_MODE=master
+      - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - ./YouTube.sql:/data/application/init.sql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-net
+
+
+  mysql-replica:
+    image: mysql:5.7
+    user: root
+    restart: always
+    ports:
+      - '3306'
+    depends_on:
+      - mysql
+    networks:
+      - my-net
+    environment:
+      - MYSQL_REPLICATION_MODE=slave
+      - MYSQL_MASTER_HOST=mysql
+      - MYSQL_MASTER_PORT_NUMBER=3306
+      - MYSQL_MASTER_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_PASSWORD=secret
+
+  myphp:
+    build: ./src/php
+    restart: always
+    expose:
+      - "9000"
+    volumes: 
+      - ./src:/var/www/html
+      - ./src/php-conf/php.ini:/usr/local/etc/php/conf.d/uploads.ini
+    depends_on:
+      - mysql
+      - mysql-replica
+    networks:
+      - my-net
+    links:
+      - mysql
+
+  mynginx:
+    image: nginx
+    restart: always
+    volumes:
+      - ./src/nginx.ini:/etc/nginx/conf.d/default.conf
+      - ./src/php-fpm.conf:/etc/php/7.4/fpm/php-fpm.conf
+      - ./src/www.conf:/etc/php/7.4/fpm/pool.d/www.conf
+      - ./src:/var/www/html/
+      - ./src/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8080:80"
+    depends_on:
+      - myphp
+    networks:
+      - my-net
+    links:
+      - mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: secret
+    ports:
+      - "8183:80"
+    networks:
+      - my-net
+
+volumes:
+  mysql-data:
+
+networks:
+  my-net:
+    driver: bridge
+
+
+
+
+
+  
