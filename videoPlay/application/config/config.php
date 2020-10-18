@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://130.211.230.250:8080/videoPlay/';
+$config['base_url'] = 'http://34.67.215.10:8080/videoPlay/';
 
 /*
 |--------------------------------------------------------------------------
