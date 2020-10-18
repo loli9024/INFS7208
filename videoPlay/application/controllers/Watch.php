@@ -98,7 +98,7 @@ class Watch extends CI_Controller {
             $com['commentId'] =$comment->id;
             $userCom=$this->user_model->getUserByUsername($comment->postedBy);
             $com['commentPic'] =$userCom->profilePic;
-            $com['pic'] =base_url($this->session->userdata('picture'));
+            $com['pic'] =base_url(get_cookie('picture'));
 
             if($this->video_model->wasCommentDislikedBy($userLogged,$commentId) ){
                 $com['commentDislikeImage'] =  base_url('assets/images/dislike-active.png');
